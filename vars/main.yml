@@ -1,5 +1,1 @@
 ---
-synthing_configuration_for_users:
-  - { user: "test1", xpath: "/configuartion/gui/user", value: "test1" }
-  - { user: "test1", xpath: "/configuration/gui/password", value: "password" }
-  - { user: "test1", xpath: "/configuration/gui/address", value: "0.0.0.0:8385"}
