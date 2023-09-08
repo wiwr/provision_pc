@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - debug:
+        msg: Local
+    
+  roles:
+    - role: desktop_look

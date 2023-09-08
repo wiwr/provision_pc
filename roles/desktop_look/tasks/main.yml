@@ -1,0 +1,15 @@
+---
+- name: Include a play for key bingings
+  include_tasks: keybingings.yml
+  loop:
+    - { id: "0", binding: "<Mod4>p", name: "Software Manager", action: "mintinstall" }
+    - { id: "1", binding: "<Mod4>v", name: "Virtual Manager", action: "virt-manager" }
+    - { id: "2", binding: "<Mod4>g", name: "Steam", action: "sh -c 'STEAM_FRAME_FORCE_CLOSE=1 steam %U'" }
+    - { id: "3", binding: "<Mod4>t", name: "Terminal", action: "mate-terminal" }
+
+- name: 
+  community.general.dconf:
+    key: "/org/mate/desktop/peripherals/keyboard/numlock-state"
+    value: "'on'"
+    state: present
+
