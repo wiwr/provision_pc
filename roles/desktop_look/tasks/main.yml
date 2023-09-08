@@ -7,9 +7,55 @@
     - { id: "2", binding: "<Mod4>g", name: "Steam", action: "sh -c 'STEAM_FRAME_FORCE_CLOSE=1 steam %U'" }
     - { id: "3", binding: "<Mod4>t", name: "Terminal", action: "mate-terminal" }
 
-- name: 
+- name: Set media-keys - {{ item.name }}
+  community.general.dconf:
+    key: "/org/mate/settings-daemon/plugins/media-keys/{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present 
+  loop:
+    - { name: "calculator", value: "'<Mod4>c'" }
+    - { name: "screensaver", value: "'<Mod4>l'" }
+    - { name: "www", value: "'<Mod4>w'" }
+
+
+- name: Set numlock-state to on
   community.general.dconf:
     key: "/org/mate/desktop/peripherals/keyboard/numlock-state"
     value: "'on'"
     state: present
 
+- name: Set background wallpaper
+  community.general.dconf:
+    key: "/org/mate/desktop/background/picture-filename"
+    value: "'/usr/share/backgrounds/ansible-wallpaper.jpg'"
+    state: present 
+
+- name: Set desktop interface theme 
+  community.general.dconf:
+    key: "/org/mate/desktop/interface/gtk-theme"
+    value: "'Mint-L-Dark-Red'"
+    state: present 
+
+- name: Set desktop interface icon theme 
+  community.general.dconf:
+    key: "/org/mate/desktop/interface/icon-theme"
+    value: "'Mint-L-Red'"
+    state: present
+
+- name: Set screensaver theme
+  community.general.dconf:
+    key: "/org/mate/desktop/screensaver/themes"
+    value: "['screensavers-xmatrix']"
+    state: present
+
+- name: Set screensaver mode
+  community.general.dconf:
+    key: "/org/mate/desktop/screensaver/mode"
+    value: "'single'"
+    state: present
+
+- name: Set main panel
+  community.general.dconf:
+    key: "/org/mate/panel/toplevels/bottom/orientation"
+    value: "'top'"
+    state: present

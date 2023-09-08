@@ -1,17 +1,17 @@
 ---
-- name: Set action for key binding  
+- name: Set action for key binding - {{ item.name }} 
   community.general.dconf:
     key: "/org/mate/desktop/keybindings/custom{{ item.id }}/action"
     value: "\"{{ item.action }}\""
     state: present
 
-- name: Set binding for key binding 
+- name: Set binding for key binding - {{ item.name }}
   community.general.dconf:
    key: "/org/mate/desktop/keybindings/custom{{ item.id }}/binding"
    value: "'{{ item.binding }}'"
    state: present
 
-- name: Set name for key binging 
+- name: Set name for key binging - {{ item.name }}
   community.general.dconf:
     key: "/org/mate/desktop/keybindings/custom{{ item.id }}/name"
     value: "'{{ item.name }}'" 
