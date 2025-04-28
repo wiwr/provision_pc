@@ -1,0 +1,9 @@
+- name: Allow SSH through the firewall
+  community.general.ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Enable UFW firewall
+  community.general.ufw:
+    state: enabled
+    policy: deny
