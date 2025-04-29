@@ -4,5 +4,5 @@
   vars_files:
     - roles/application_installation/vars/apps.yml 
   roles:
-    - application_installaction
+    - application_installation
     - firewall
