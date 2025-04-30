@@ -1,0 +1,26 @@
+- name: Install OpenSSH server
+  ansible.builtin.apt:
+    name: openssh-server
+    state: present
+    update_cache: yes
+
+- name: Update ssh configuration 
+  ansible.builtin.copy:
+    src: /etc/ssh/sshd_config
+    dest: /etc/ssh/sshd_config.bak
+    backup: yes
+
+- name: Set desired SSH configuration options
+  ansible.builtin.lineinfile: 
+    path: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  loop:
+    - { regexp: '^#?Port', line: 'Port 27772' }
+
+- name: Restart SSH Server
+  ansible.builtin.service:
+    name: ssh
+    state: started
+    enabled: yes

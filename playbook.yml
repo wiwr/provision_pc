@@ -5,4 +5,5 @@
     - roles/application_installation/vars/apps.yml 
   roles:
     - application_installation
+    - ssh
     - firewall
