@@ -1,9 +1,6 @@
-- name: Update apt cache
+- name: Update and upgrade system
   ansible.builtin.apt:
     update_cache: yes
-
-- name: Upgrade all packages
-  ansible.builtin.apt:
     upgrade: dist
 
 - name: Install application list
@@ -11,3 +8,9 @@
     name: "{{ item }}"
     state: present
   loop: "{{ app_list }}"
+
+- name: Clean up
+  ansible.builtin.apt:
+    state: absent
+    autoremove: yes
+    autoclean: yes
