@@ -1,0 +1,12 @@
+- name: Check connected displays
+  ansible.builtin.shell: xrandr
+  register: display_info
+  chenged_when: "'eDP-1' not in display_info.stdout and 'Virtual-1' not in display_info.stdout"
+
+- name: Set resolution for eDP-1
+  ansible.builtin.shell: xrandr --output eDP-1 --mode 1920x1080
+  when: "'eDP-1' in display_info.stdout"
+
+- name: Set resolution for Virtual-1
+  ansible.builtin.shell: xrandr --output Virtual-1 --mode 1920x1080
+  when: "'Virtual-1' in display_info.stdout"
