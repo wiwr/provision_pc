@@ -2,12 +2,12 @@
   ansible.builtin.ufw:
     state: enabled
     default: deny
-    direction: incoming
+    direction: in
 
 - name: Allow outgoing traffic
   ansible.builtin.ufw:
     rule: allow
-    direction: outgoing
+    direction: out
 
 - name: Allow SSH through the firewall
   ansible.builtin.ufw:
