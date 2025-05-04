@@ -3,9 +3,16 @@
   become: yes
   vars_files:
     - roles/application_installation/vars/apps.yml 
+    - vars/users.yml
+  tasks:
+    - name: Desktop 
+      include_role:
+        name: desktop
+      loop: "{{ users }}"
+      loop_control:
+        loop_var: user_name
   roles:
     - application_installation
     - ssh
     - firewall
-    - desktop
     - desktop_look
