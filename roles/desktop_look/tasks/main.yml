@@ -1,9 +1,9 @@
 ---
-- name: Set custom keybindings for user {{ user_name }}
+- name: "Set custom keybindings for user {{ user_name }}"
   become: yes
   become_user: "{{ user_name }}"
   environment: 
-  XDG_RUNTIME_DIR: "/run/user/{{ lookup('ansible.builtin.pipe', 'id -u ' + user_name) }}"
+    XDG_RUNTIME_DIR: "/run/user/{{ lookup('ansible.builtin.pipe', 'id -u ' + user_name) }}"
   include_tasks: keybingings.yml
   loop:
     - { id: "0", binding: "<Mod4>p", name: "Software Manager", action: "mintinstall" }

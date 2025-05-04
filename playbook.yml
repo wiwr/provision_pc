@@ -5,9 +5,9 @@
     - roles/application_installation/vars/apps.yml 
     - vars/users.yml
   tasks:
-    - name: Desktop 
+    - name: Desktop Look
       include_role:
-        name: desktop
+        name: desktop_look
       loop: "{{ users }}"
       loop_control:
         loop_var: user_name
@@ -15,4 +15,4 @@
     - application_installation
     - ssh
     - firewall
-    - desktop_look
+    - desktop
