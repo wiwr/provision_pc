@@ -1,15 +1,40 @@
 ---
-- name: "Set custom keybindings for user {{ user_name }}"
+- name: Apply keybindings for each user 
   become: yes
-  become_user: "{{ user_name }}"
-  environment: 
-    XDG_RUNTIME_DIR: "/run/user/{{ lookup('ansible.builtin.pipe', 'id -u ' + user_name) }}"
-  include_tasks: keybingings.yml
-  loop:
-    - { id: "0", binding: "<Mod4>p", name: "Software Manager", action: "mintinstall" }
-    - { id: "1", binding: "<Mod4>v", name: "Virtual Manager", action: "virt-manager" }
-    - { id: "2", binding: "<Mod4>g", name: "Steam", action: "sh -c 'STEAM_FRAME_FORCE_CLOSE=1 steam %U'" }
-    - { id: "3", binding: "<Mod4>t", name: "Terminal", action: "mate-terminal" }
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user_name
+  tasks:
+    - name: Apply keybindings for user {{ user_name }}
+      become: yes
+      become_user: "{{ user_name }}"
+      environment: 
+        XDG_RUNTIME_DIR: "/run/user/{{ lookup('ansible.builtin.pipe', 'id -u ' + user_name) }}"
+      loop:
+        - { id: "0", binding: "<Mod4>p", name: "Software Manager", action: "mintinstall" }
+        - { id: "1", binding: "<Mod4>v", name: "Virtual Manager", action: "virt-manager" }
+        - { id: "2", binding: "<Mod4>g", name: "Steam", action: "sh -c 'STEAM_FRAME_FORCE_CLOSE=1 steam %U'" }
+        - { id: "3", binding: "<Mod4>t", name: "Terminal", action: "mate-terminal" }
+      loop_control:
+        loop_var: item
+      block:
+        - name: Set action for key binding
+          community.general.dconf:
+            key: "/org/mate/desktop/keybindings/custom{{ item.id }}/action"
+            value: "\"{{ item.action }}\""
+            state: present
+
+        - name: Set binding for key binding
+          community.general.dconf:
+           key: "/org/mate/desktop/keybindings/custom{{ item.id }}/binding"
+           value: "'{{ item.binding }}'"
+           state: present
+
+        - name: Set name for key binging
+          community.general.dconf:
+            key: "/org/mate/desktop/keybindings/custom{{ item.id }}/name"
+            value: "'{{ item.name }}'"
+            state: present
 
 - name: 
   community.general.dconf:
