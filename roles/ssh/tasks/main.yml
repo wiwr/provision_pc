@@ -17,7 +17,7 @@
     line: "{{ item.line }}"
     state: present
   loop:
-    - { regexp: '^#?Port', line: 'Port 27772' }
+    - { regexp: '^#?Port', line: 'Port {{ ssh_port }}' }
 
 - name: Restart SSH Server
   ansible.builtin.service:
