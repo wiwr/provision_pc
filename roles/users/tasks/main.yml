@@ -12,4 +12,4 @@
 
 - block:
   - import_tasks: root.yml
-
+  - import_tasks: users.yml
