@@ -1,6 +1,17 @@
 ---
-- hosts: localhost 
-  become: yes
+- hosts: all
+  become: true
+  pre_tasks:
+    - name: Update package cache (arch)
+      anisble.builtin.pacman: update_cache=yes
+      changed_when: False
+      when: ansible_distribution == "Archlinux"
+
+    - name: Update package cache (debian, etc)
+      ansible.builtin.apt: update_cache=yes
+      changed_when: False
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
   vars_files:
     - roles/application_installation/vars/apps.yml 
     - vars/users.yml
@@ -13,7 +24,17 @@
       loop_control:
         loop_var: user_name
   roles:
+    - users
     - application_installation
     - ssh
     - firewall
     - desktop
+
+- hosts: all
+  become: true
+  tasks: 
+    - name: Cleanup package cache (debian and ubuntu)
+      ansible.builtin.apt:
+        autoremove: yes
+        purge: yes
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
