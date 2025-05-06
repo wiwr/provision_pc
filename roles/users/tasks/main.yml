@@ -1,0 +1,15 @@
+#tasks:
+#  - name: Add users
+#    ansible.builtin.user:
+#      name: "{{ item.name }}"
+#      comment: "{{ item.description }}"
+#      state: present
+#      shell: /bin/bash
+#      create_home: yes
+#      system: no
+#      uid: null
+#    loop: "{{ users }}"
+
+- block:
+  - import_tasks: root.yml
+
