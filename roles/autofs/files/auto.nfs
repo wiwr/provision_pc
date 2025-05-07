@@ -1,0 +1,6 @@
+LUKS_SSD -fstype=nfs4,rw,soft,intr,timeo=14 192.168.1.203:/LUKS_SSD
+Containers -fstype=nfs4,rw,soft,intr,timeo=14 192.168.1.203:/Containers
+Photos -fstype=nfs4,rw,soft,intr,timeo=14 192.168.1.203:/Photos
+Filmy -fstype=nfs4,rw,soft,intr,timeo=14 192.168.1.203:/Filmy
+Jellyfin -fstype-nfs4,rw,soft,intr,timeo=14 192.168.1.202:/jellyfin
+Backup -fstype-nfs4,rw,soft,intr,timeo=14 192.168.1.202:/backup

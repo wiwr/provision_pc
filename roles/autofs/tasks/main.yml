@@ -1,0 +1,30 @@
+- name: install autofs
+  ansible.builtin.apt:
+    name:
+      - nfs-common
+      - autofs
+    state: present
+
+- name: Start and enable deamon
+  ansible.builtin.service:
+    name: autofs
+    state: started
+    enabled: true
+
+- name: Copy auto.master config file
+  ansible.builtin.copy:
+    src: auto.master
+    dest: /etc/auto.master
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_autofs
+
+- name: Copy auto.nfs config file
+  ansible.builtin.copy:
+    src: auto.nfs
+    dest: /etc/auto.nfs
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_autofs

@@ -1,0 +1,1 @@
+/mnt/nfs /etc/auto.nfs --ghost --timeout 60
