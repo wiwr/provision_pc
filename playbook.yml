@@ -3,7 +3,7 @@
   become: true
   pre_tasks:
     - name: Update package cache (arch)
-      anisble.builtin.pacman: update_cache=yes
+      ansible.builtin.pacman: update_cache=yes
       changed_when: False
       when: ansible_distribution == "Archlinux"
 
