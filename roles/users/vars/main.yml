@@ -1,12 +1,11 @@
-vars:
-  users:
-    - name: test 
-      description: Test
-    - name: drugi
-      description: Drugi 
-    - name: trzeci   
-      description: Trzeci 
-    - name: czwarty 
-      description: Czwarty 
-    - name: steam
-      description: Steam
+users:
+  - name: test 
+    description: Test
+  - name: drugi
+    description: Drugi 
+  - name: trzeci   
+    description: Trzeci 
+  - name: czwarty 
+    description: Czwarty 
+  - name: steam
+    description: Steam
